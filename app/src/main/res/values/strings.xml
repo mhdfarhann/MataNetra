@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MataNetra</string>
+    <string name="text_1">Ketuk sekali dan tahan layar kemudian sebutkan tujuan anda</string>
+    <string name="record">record</string>
+    <string name="lokasi_tuju">Lokasi Tujuan Anda Adalah\n</string>
+    <string name="ketuk_layar">Ketuk layar 2 kali untuk lanjut\natau swipe ke kiri untuk batal</string>
+    <string name="perpustakaan">Perpustakaan\n</string>
+    <string name="new_text">Perpustakaan\n</string>
+    <string name="dummy_text"> 5 meter lagi untuk mencapai perpustakaan</string>
+    <string name="sampai_dituju">Anda sudah sampai di tujuan</string>
+    <string name="finishing">Ketuk layar 2 kali untuk mencari tujuan lain</string>
+</resources>
