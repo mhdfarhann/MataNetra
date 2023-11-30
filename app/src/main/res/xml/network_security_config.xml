@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <!-- Specify the certificates you trust (not recommended for production) -->
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">103.127.97.215</domain>
+        <!-- Add more domains or IP addresses as needed -->
+    </domain-config>
+</network-security-config>

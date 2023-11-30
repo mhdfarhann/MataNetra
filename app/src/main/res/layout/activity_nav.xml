@@ -43,13 +43,36 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <TextView
-            android:id="@+id/tv_nav"
+            android:id="@+id/tv_lat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
+            android:layout_marginStart="20dp"
             android:gravity="center_horizontal|top"
-            android:text="@string/dummy_text"
-            android:textSize="20sp"
+            android:text="@string/lat"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_lon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/lon"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_azimuth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="130dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/azimuth"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>

@@ -14,7 +14,7 @@
     tools:context=".confirmation.ConfirmationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/confirmation_layout"
+        android:id="@+id/inner_layout"
         android:layout_width="355dp"
         android:layout_height="800dp">
 
@@ -34,9 +34,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.228" />
+            app:layout_constraintVertical_bias="0.118" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="257dp"
             android:layout_height="60dp"
             android:backgroundTint="@color/blue_1"
@@ -46,7 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lokasi_tuju"
-            app:layout_constraintVertical_bias="0.277">
+            app:layout_constraintVertical_bias="0.18">
 
             <TextView
                 android:id="@+id/tv_tujuan"
@@ -78,6 +79,30 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_getLoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Get Data"
+            android:onClick="@{() -> viewModel.onGetDataClicked()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+        <TextView
+            android:id="@+id/tv_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_getLoc" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
