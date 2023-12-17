@@ -71,4 +71,6 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
+
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

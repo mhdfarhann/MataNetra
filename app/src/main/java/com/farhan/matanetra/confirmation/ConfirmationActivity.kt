@@ -35,6 +35,17 @@ class ConfirmationActivity : AppCompatActivity() {
             binding.tvData.text = displayText
 
         }
+
+        val title = intent.getStringExtra("title")
+
+        // Check if title is not null
+        if (title != null) {
+            // Set the title to the TextView in your layout
+            binding.tvTujuan.text = title
+        } else {
+            // Handle the case when title is null (optional)
+            binding.tvTujuan.text = "Title Not Found"
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {

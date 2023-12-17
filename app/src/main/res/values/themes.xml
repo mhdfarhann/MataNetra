@@ -10,6 +10,13 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
 
+
+    <style name="Theme.MataNetraSplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logomatanetrasplash</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.MataNetra</item>
+    </style>
+
     <style name="Theme.MataNetra" parent="Base.Theme.MataNetra" />
 
     <style name="FloatingActionButtonStyle" parent="Widget.Design.FloatingActionButton">
