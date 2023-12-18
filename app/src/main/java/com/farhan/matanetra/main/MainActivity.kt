@@ -73,7 +73,6 @@ class MainActivity : AppCompatActivity(), OnInitListener {
                     stopRecording()
                     isRecording = false
                 }
-                startActivity(Intent(this, ConfirmationActivity::class.java))
             }
             view.performClick()
             true
@@ -98,8 +97,6 @@ class MainActivity : AppCompatActivity(), OnInitListener {
 
         // Initialize TextToSpeech
         textToSpeech = TextToSpeech(this, this)
-
-
     }
 
     override fun onDestroy() {

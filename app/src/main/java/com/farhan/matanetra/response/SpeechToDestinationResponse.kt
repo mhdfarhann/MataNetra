@@ -1,6 +1,5 @@
 package com.farhan.matanetra.response
 
-import com.google.gson.annotations.SerializedName
 data class SpeechToDestinationResponse(
     val destination: Destination,
     val status: String

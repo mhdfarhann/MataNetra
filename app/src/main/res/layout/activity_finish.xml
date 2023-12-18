@@ -15,7 +15,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/confirmation_layout"
-        android:layout_width="355dp"
+        android:layout_width="match_parent"
         android:layout_height="800dp">
 
 
