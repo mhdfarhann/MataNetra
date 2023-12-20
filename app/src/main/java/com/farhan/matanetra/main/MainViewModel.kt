@@ -1,5 +1,8 @@
 package com.farhan.matanetra.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.farhan.matanetra.api.Config
 import com.farhan.matanetra.response.SpeechToDestinationResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -11,7 +14,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class MainViewModel {
+class MainViewModel : ViewModel() {
+
+    var destinationTitleCallback: ((String) -> Unit)? = null
+
+
     fun uploadAudioToApi(audioFilePath: String?, uploadCallback: (Boolean, String) -> Unit) {
         try {
             if (audioFilePath != null) {
@@ -28,12 +35,16 @@ class MainViewModel {
                         ) {
                             if (response.isSuccessful) {
                                 val title = response.body()?.destination?.title ?: ""
-                                // Pass the title to the callback
+
+                                destinationTitleCallback?.invoke(title)
+
+                                // Pass the destination ID and title to the callback
                                 uploadCallback.invoke(true, title)
                             } else {
                                 handleApiFailure(Exception("API call failed"), uploadCallback)
                             }
                         }
+
                         override fun onFailure(call: Call<SpeechToDestinationResponse>, t: Throwable) {
                             handleApiFailure(t, uploadCallback)
                         }
@@ -44,7 +55,6 @@ class MainViewModel {
             uploadCallback.invoke(false, "")
         }
     }
-
 
     private fun handleApiFailure(throwable: Throwable, uploadCallback: (Boolean, String) -> Unit) {
         // Handle API failure here

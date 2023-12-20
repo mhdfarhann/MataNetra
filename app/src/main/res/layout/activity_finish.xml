@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@id/confirmation_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -11,10 +10,10 @@
     app:cardElevation="10dp"
     app:cardUseCompatPadding="true"
     android:backgroundTint="@color/light_blue_3"
-    tools:context=".confirmation.ConfirmationActivity">
+    tools:context=".finish.FinishActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/confirmation_layout"
+        android:id="@+id/inner_layout"
         android:layout_width="match_parent"
         android:layout_height="800dp">
 
@@ -74,6 +73,7 @@
             android:layout_marginBottom="280dp"
             android:gravity="center_horizontal|top"
             android:text="@string/finishing"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

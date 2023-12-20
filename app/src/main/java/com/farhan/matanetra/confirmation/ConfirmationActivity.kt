@@ -7,12 +7,12 @@ import android.speech.tts.TextToSpeech.OnInitListener
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.farhan.matanetra.databinding.ActivityConfirmationBinding
 import com.farhan.matanetra.main.MainActivity
 import com.farhan.matanetra.navigation.NavActivity
 import java.util.*
+import kotlin.math.abs
 
 class ConfirmationActivity : AppCompatActivity(), OnInitListener {
 
@@ -24,8 +24,6 @@ class ConfirmationActivity : AppCompatActivity(), OnInitListener {
     private var x1: Float = 0f
     private var x2: Float = 0f
     private val MIN_DISTANCE = 150
-
-    private val confirmationViewModel: ConfirmationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +37,7 @@ class ConfirmationActivity : AppCompatActivity(), OnInitListener {
         if (title != null) {
             binding.tvTujuan.text = title
         } else {
-            binding.tvTujuan.text = "Title Not Found"
+            binding.tvTujuan.text = ""
         }
     }
 
@@ -50,7 +48,7 @@ class ConfirmationActivity : AppCompatActivity(), OnInitListener {
             MotionEvent.ACTION_UP -> {
                 x2 = event.x
                 val deltaX: Float = x2 - x1
-                if (Math.abs(deltaX) > MIN_DISTANCE) {
+                if (abs(deltaX) > MIN_DISTANCE) {
                     startMainActivity()
                 }
             }

@@ -25,8 +25,7 @@ class WavConvert(private val context: Context, private val path: String) {
     private var recordingThread: Thread? = null
     private var isRecording = false
 
-    private val mainActivityViewModel = MainViewModel()
-
+    private val mainViewModel = MainViewModel()
 
     init {
         try {
@@ -159,13 +158,6 @@ class WavConvert(private val context: Context, private val path: String) {
                     Manifest.permission.RECORD_AUDIO
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return
             }
             recorder = AudioRecord(
@@ -204,11 +196,11 @@ class WavConvert(private val context: Context, private val path: String) {
                 createWavFile(tempRawFilePath, tempWavFilePath)
 
                 // Upload the WAV file to the API service
-                mainActivityViewModel.uploadAudioToApi(tempWavFilePath, uploadCallback)
+                mainViewModel.uploadAudioToApi(tempWavFilePath, uploadCallback)
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            uploadCallback.invoke(false,"")
+            uploadCallback.invoke(false,"" )
         }
     }
 }

@@ -1,9 +1,13 @@
 package com.farhan.matanetra.api
 
+import com.farhan.matanetra.response.Destination
 import com.farhan.matanetra.response.RoutesResponse
+import com.farhan.matanetra.response.ShortestPathRequest
+import com.farhan.matanetra.response.ShortestPathResponse
 import com.farhan.matanetra.response.SpeechToDestinationResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -20,4 +24,8 @@ interface ApiService {
         @Part audio: MultipartBody.Part,
         @Query("fetchData") fetchData: Boolean = true
     ): Call<SpeechToDestinationResponse>
+
+    @POST("shortest-path")
+    fun getShortestPath(@Body request: ShortestPathRequest): Call<ShortestPathResponse>
+
 }
