@@ -3,26 +3,27 @@ package com.farhan.matanetra.finish
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.lifecycle.ViewModelProvider
-import com.farhan.matanetra.confirmation.ConfirmationActivity
 import com.farhan.matanetra.databinding.ActivityFinishBinding
 import com.farhan.matanetra.main.MainActivity
 import com.farhan.matanetra.main.MainViewModel
 import com.farhan.matanetra.tools.WavConvert
+import java.util.Locale
 
-class FinishActivity : AppCompatActivity() {
+class FinishActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private lateinit var gestureDetector: GestureDetector
 
     private lateinit var binding : ActivityFinishBinding
 
-    private lateinit var mainViewModel: MainViewModel
-
-    private lateinit var confirmationActivity: ConfirmationActivity
-
     private lateinit var wavConvert: WavConvert
+
+    private lateinit var textToSpeech: TextToSpeech
+    private var isTtsInitialized = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +32,10 @@ class FinishActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         gestureDetector = GestureDetector(this, DoubleTapGestureListener())
+        textToSpeech = TextToSpeech(this, this)
+
 
         wavConvert = WavConvert(this, getExternalFilesDir(null)?.absolutePath ?: "recordings")
-
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         val title = intent.getStringExtra("title")
         if (title != null) {
@@ -63,4 +64,36 @@ class FinishActivity : AppCompatActivity() {
         startActivity(intent)
         finish() // Optional: finish ConfirmationActivity if you don't want to keep it in the back stack
     }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            isTtsInitialized = true
+            val result: Int = textToSpeech.setLanguage(Locale("id", "ID"))
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TextToSpeech", "Language data is missing or not supported")
+            } else {
+                Log.d("TextToSpeech", "TextToSpeech initialized successfully")
+                speakText("Anda sudah sampai di tujuan, ${binding.tvTujuan.text}. Ketuk layar 2 kali untuk mencari tujuan lain")
+            }
+        } else {
+            Log.e("TextToSpeech", "TextToSpeech initialization failed")
+        }
+    }
+
+    private fun speakText(text: String) {
+        if (isTtsInitialized) {
+            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+        } else {
+            Log.e("TextToSpeech", "TextToSpeech not initialized, speakText aborted")
+        }
+    }
+
+    override fun onDestroy() {
+        if (::textToSpeech.isInitialized) {
+            textToSpeech.stop()
+            textToSpeech.shutdown()
+        }
+        super.onDestroy()
+    }
+
 }

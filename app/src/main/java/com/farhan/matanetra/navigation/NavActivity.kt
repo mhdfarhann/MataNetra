@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.Toast
@@ -64,6 +65,8 @@ class NavActivity : AppCompatActivity(), SensorEventListener {
 
     private val REQUEST_CODE = 123
 
+    private var doubleTapTitle: String? = null
+
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -103,6 +106,10 @@ class NavActivity : AppCompatActivity(), SensorEventListener {
 
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
+        mainViewModel.destinationTitleCallback = { title ->
+            // Handle the title here, you can pass it to another activity
+            startFinishActivity(title)
+        }
 
         if (checkPermissions()) {
             startLocationUpdates()
@@ -319,13 +326,15 @@ class NavActivity : AppCompatActivity(), SensorEventListener {
     private inner class DoubleTapGestureListener : GestureDetector.SimpleOnGestureListener() {
         override fun onDoubleTap(e: MotionEvent): Boolean {
             // Implement the code to start NavActivity here
-            startFinishActivity()
+            val title = binding.tvTujuanNav.text.toString()
+            startFinishActivity(title)
             return true
         }
     }
 
-    private fun startFinishActivity() {
-        val intent = Intent(this, FinishActivity::class.java)
+    private fun startFinishActivity(title: String) {
+        val intent = Intent(this@NavActivity, FinishActivity::class.java)
+        intent.putExtra("title", title)
         startActivity(intent)
         finish() // Optional: finish ConfirmationActivity if you don't want to keep it in the back stack
     }

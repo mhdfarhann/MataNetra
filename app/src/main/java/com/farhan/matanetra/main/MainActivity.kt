@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity(), OnInitListener {
                 // Delay for 1 second before speaking the welcome message
                 Handler(Looper.getMainLooper()).postDelayed({
                     speakWelcomeMessage()
-                }, 1000)
+                }, 500)
             }
         } else {
             // Handle initialization failure
