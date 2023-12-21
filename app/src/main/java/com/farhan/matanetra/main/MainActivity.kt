@@ -1,7 +1,6 @@
 package com.farhan.matanetra.main
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.speech.tts.TextToSpeech
@@ -10,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.MotionEvent
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity(), OnInitListener {
     private lateinit var wavConvert: WavConvert
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var progressDialog: ProgressDialog
     private var isRecording = false
 
 
@@ -47,10 +46,10 @@ class MainActivity : AppCompatActivity(), OnInitListener {
         Thread.sleep(3000)
         installSplashScreen()
 
+
         wavConvert = WavConvert(this, getExternalFilesDir(null)?.absolutePath ?: "recordings")
 
 
-        progressDialog = ProgressDialog(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -132,8 +131,10 @@ class MainActivity : AppCompatActivity(), OnInitListener {
 
     private fun stopRecording() {
         try {
+            binding.loading.visibility = View.VISIBLE
             wavConvert.stopRecording { isSuccess, title ->
                 if (isSuccess) {
+                    binding.loading.visibility = View.GONE
                     // Handle successful audio upload here
                     // You can use the 'title' variable as needed
                     navigateToConfirmationActivity(title)
@@ -200,4 +201,6 @@ class MainActivity : AppCompatActivity(), OnInitListener {
             // Handle initialization failure
         }
     }
+
+
 }

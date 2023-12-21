@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.farhan.matanetra.databinding.ActivityConfirmationBinding
 import com.farhan.matanetra.main.MainActivity
+import com.farhan.matanetra.main.MainViewModel
 import com.farhan.matanetra.navigation.NavActivity
 import java.util.*
 import kotlin.math.abs
@@ -25,10 +27,19 @@ class ConfirmationActivity : AppCompatActivity(), OnInitListener {
     private var x2: Float = 0f
     private val MIN_DISTANCE = 150
 
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityConfirmationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        viewModel.destinationTitleCallback = { title ->
+            // Handle the title here, you can pass it to another activity
+            startNavActivity(title)
+        }
 
         gestureDetector = GestureDetector(this, GestureListener())
         textToSpeech = TextToSpeech(this, this)
@@ -73,7 +84,8 @@ class ConfirmationActivity : AppCompatActivity(), OnInitListener {
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
         override fun onDoubleTap(e: MotionEvent): Boolean {
-            startNavActivity()
+            val title = binding.tvTujuan.text.toString()
+            startNavActivity(title)
             return true
         }
     }
@@ -84,8 +96,9 @@ class ConfirmationActivity : AppCompatActivity(), OnInitListener {
         finish()
     }
 
-    private fun startNavActivity() {
+    private fun startNavActivity(title : String) {
         val intent = Intent(this, NavActivity::class.java)
+        intent.putExtra("title", title)
         startActivity(intent)
         finish()
     }

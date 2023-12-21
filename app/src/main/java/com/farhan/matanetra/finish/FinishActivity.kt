@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.lifecycle.ViewModelProvider
+import com.farhan.matanetra.confirmation.ConfirmationActivity
 import com.farhan.matanetra.databinding.ActivityFinishBinding
 import com.farhan.matanetra.main.MainActivity
 import com.farhan.matanetra.main.MainViewModel
@@ -18,6 +19,8 @@ class FinishActivity : AppCompatActivity() {
     private lateinit var binding : ActivityFinishBinding
 
     private lateinit var mainViewModel: MainViewModel
+
+    private lateinit var confirmationActivity: ConfirmationActivity
 
     private lateinit var wavConvert: WavConvert
 
@@ -39,8 +42,6 @@ class FinishActivity : AppCompatActivity() {
         } else {
             binding.tvTujuan.text = ""
         }
-
-
 
     }
 

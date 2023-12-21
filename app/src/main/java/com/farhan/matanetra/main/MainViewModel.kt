@@ -1,7 +1,6 @@
 package com.farhan.matanetra.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import com.farhan.matanetra.api.Config
 import com.farhan.matanetra.response.SpeechToDestinationResponse
@@ -17,7 +16,6 @@ import java.io.File
 class MainViewModel : ViewModel() {
 
     var destinationTitleCallback: ((String) -> Unit)? = null
-
 
     fun uploadAudioToApi(audioFilePath: String?, uploadCallback: (Boolean, String) -> Unit) {
         try {

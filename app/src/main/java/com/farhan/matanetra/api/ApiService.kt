@@ -1,6 +1,5 @@
 package com.farhan.matanetra.api
 
-import com.farhan.matanetra.response.Destination
 import com.farhan.matanetra.response.RoutesResponse
 import com.farhan.matanetra.response.ShortestPathRequest
 import com.farhan.matanetra.response.ShortestPathResponse
@@ -15,9 +14,6 @@ import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/get-routes")
-    fun getRoutes(): Call<RoutesResponse>
-
     @Multipart
     @POST("speech-to-destination")
     fun uploadAudio(

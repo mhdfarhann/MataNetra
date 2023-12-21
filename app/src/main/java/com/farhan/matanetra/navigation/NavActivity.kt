@@ -1,6 +1,7 @@
 package com.farhan.matanetra.navigation
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -51,12 +52,11 @@ class NavActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var vibrator: Vibrator
 
+
     private lateinit var navViewModel: NavViewModel
     private lateinit var destinationPoints: List<Destination>
 
     private lateinit var mainViewModel: MainViewModel
-
-    private lateinit var wavConvert: WavConvert
 
     private val VIBRATION_DISTANCE_THRESHOLD = 5.0
     private val VIBRATION_AZIMUTH_THRESHOLD = 180.0
@@ -103,11 +103,19 @@ class NavActivity : AppCompatActivity(), SensorEventListener {
 
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
+
         if (checkPermissions()) {
             startLocationUpdates()
             registerCompassListener()
         } else {
             requestLocationPermissions()
+        }
+
+        val title = intent.getStringExtra("title")
+        if (title != null) {
+            binding.tvTujuanNav.text = title
+        } else {
+            binding.tvTujuanNav.text = ""
         }
 
         startCamera()
@@ -234,6 +242,7 @@ class NavActivity : AppCompatActivity(), SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateUI(latitude: Double, longitude: Double) {
         // Update your UI components with the new latitude and longitude values
         // For example, you can display them on TextViews
@@ -296,6 +305,7 @@ class NavActivity : AppCompatActivity(), SensorEventListener {
         return azimuth
     }
 
+    @SuppressLint("SetTextI18n")
     private fun rotateCompass(azimuth: Float) {
         // Update your compass UI here (e.g., set azimuth to a TextView)
         binding.tvAzimuth.text = "Azimuth: $azimuth°"

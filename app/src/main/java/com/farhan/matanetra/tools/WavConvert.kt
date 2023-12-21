@@ -197,6 +197,7 @@ class WavConvert(private val context: Context, private val path: String) {
 
                 // Upload the WAV file to the API service
                 mainViewModel.uploadAudioToApi(tempWavFilePath, uploadCallback)
+
             }
         } catch (e: Exception) {
             e.printStackTrace()
